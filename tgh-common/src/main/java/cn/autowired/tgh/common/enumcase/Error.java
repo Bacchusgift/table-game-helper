@@ -25,16 +25,16 @@ public enum Error {
     /**
      * 错误的代码
      */
-    private final int err_code;
+    private final int errCode;
 
     /**
      * 错误的默认提示信息
      */
-    private final String err_info;
+    private final String errInfo;
 
-    Error(int err_code, String err_info) {
-        this.err_code = err_code;
-        this.err_info = err_info;
+    Error(int errCode, String errInfo) {
+        this.errCode = errCode;
+        this.errInfo = errInfo;
     }
 
     /**
@@ -43,8 +43,15 @@ public enum Error {
      */
     @Override
     public String toString(){
-        return String.valueOf(this.err_code);
+        return String.valueOf(this.errCode);
     }
 
+    /**
+     * 获取错误提示
+     * @return
+     */
+    public String getErrInfo() {
+        return this.errInfo;
+    }
 }
 

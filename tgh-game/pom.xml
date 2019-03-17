@@ -9,14 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>tgh-service</artifactId>
-    <dependencies>
-        <dependency>
-            <groupId>cn.autowired.tgh</groupId>
-            <artifactId>tgh-repository</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-    </dependencies>
+    <artifactId>tgh-game</artifactId>
 
 
 </project>
