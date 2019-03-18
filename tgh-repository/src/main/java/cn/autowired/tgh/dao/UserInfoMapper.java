@@ -1,7 +1,7 @@
 package cn.autowired.tgh.dao;
 
 
-import cn.autowired.tgh.entity.Userinfo;
+import cn.autowired.tgh.entity.UserInfo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -12,6 +12,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author bacchus
  * @since 2019-03-12
  */
-public interface UserinfoMapper extends BaseMapper<Userinfo> {
+public interface UserInfoMapper extends BaseMapper<UserInfo> {
 
 }

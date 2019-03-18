@@ -1,7 +1,7 @@
 package cn.autowired.tgh.service;
 
 
-import cn.autowired.tgh.entity.Userinfo;
+import cn.autowired.tgh.entity.UserInfo;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -12,6 +12,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author bacchus
  * @since 2019-03-12
  */
-public interface IUserinfoService extends IService<Userinfo> {
+public interface IUserInfoService extends IService<UserInfo> {
 
 }

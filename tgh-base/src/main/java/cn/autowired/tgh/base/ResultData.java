@@ -11,6 +11,9 @@ import lombok.Getter;
 import lombok.NonNull;
 
 import java.io.Serializable;
+import java.lang.reflect.Field;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @Description:
@@ -47,14 +50,27 @@ public class ResultData implements Serializable {
         this.err_msg = errCode.getErrInfo();
     }
 
+
     public ResultData(){}
 
     public static ResultData ok(Object data) {
+
         return new ResultData(ErrorCode.SUCCESS,data);
     }
 
     public static ResultData ok() {
         return new ResultData(ErrorCode.SUCCESS);
+    }
+
+    public static ResultData ok(String[]keys,Object[]values) {
+        if (keys.length != values.length){
+            throw new IllegalArgumentException();
+        }
+        Map map = new HashMap();
+        for (int i = 0; i < keys.length; i++) {
+            map.put(keys[i],values[i]);
+        }
+        return new ResultData(ErrorCode.SUCCESS,map);
     }
 
     public  static ResultData bad(ErrorCode errCode) {

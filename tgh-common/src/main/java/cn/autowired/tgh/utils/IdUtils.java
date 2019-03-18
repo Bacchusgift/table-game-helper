@@ -1,5 +1,7 @@
 package cn.autowired.tgh.utils;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,6 +18,19 @@ import java.util.stream.Stream;
 public class IdUtils {
 
 
+
+    public static String roomId(){
+        int random = (int) (Math.round(Math.random()))*1000+10000;
+        return String.valueOf(random);
+    }
+
+
+
+
+    /**
+     * 得到sessionkey的id
+     * @return
+     */
     public static String sessionKey(){
         String sessionKey = UUID.randomUUID()
                 .toString()

@@ -32,7 +32,9 @@ public enum ErrorCode {
     /**
      * 登录信息过期
      */
-    LOGOUT(-4,"登录信息已过期");
+    LOGOUT(-4,"登录信息已过期"),
+
+    HAS_NO_ROOM(-5,"查无此房间");
 
     /**
      * 错误的代码
