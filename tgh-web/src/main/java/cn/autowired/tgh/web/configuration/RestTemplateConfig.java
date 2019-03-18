@@ -46,7 +46,6 @@ public class RestTemplateConfig {
         MediaType[] mediaTypes = new MediaType[]{
                 MediaType.APPLICATION_JSON,
                 MediaType.APPLICATION_OCTET_STREAM,
-
                 MediaType.TEXT_HTML,
                 MediaType.TEXT_PLAIN,
                 MediaType.TEXT_XML,

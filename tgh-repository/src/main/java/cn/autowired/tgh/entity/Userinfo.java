@@ -1,12 +1,14 @@
 package cn.autowired.tgh.entity;
 
-
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
@@ -15,19 +17,61 @@ import java.time.LocalDateTime;
  * </p>
  *
  * @author bacchus
- * @since 2019-03-12
+ * @since 2019-03-18
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 public class Userinfo extends Model<Userinfo> {
 
     private static final long serialVersionUID = 1L;
 
+    @TableId(type = IdType.AUTO)
+    private Integer id;
+    /**
+     * 用户头像地址
+     */
+    private String headimgurl;
+
+    /**
+     * 用户性别 1是男 2是女 0是未知
+     */
+    private Integer sex;
+
+    /**
+     * 用户是否关注此公众号
+     */
+    private Integer subscribe;
+
+    /**
+     * 用户最后一次关注此公众号的时间
+     */
+    private String subscribeTime;
+
+    /**
+     * 用户国家
+     */
+    private String country;
+
+    /**
+     * 用户省份
+     */
+    private String province;
+
+    /**
+     * 用户所在城市
+     */
+    private String city;
+
+    /**
+     * 用户手机号
+     */
+    private String tel;
+
     /**
      * 用户昵称
      */
-    private String username;
+    private String nickname;
 
     /**
      * 用户openId
@@ -42,7 +86,7 @@ public class Userinfo extends Model<Userinfo> {
     private String unionId;
 
     /**
-     * 房间ID
+     * 当前所在房间ID
      */
     @TableField("roomId")
     private Integer roomId;
@@ -57,5 +101,10 @@ public class Userinfo extends Model<Userinfo> {
      */
     private LocalDateTime updateTime;
 
+
+    @Override
+    protected Serializable pkVal() {
+        return null;
+    }
 
 }

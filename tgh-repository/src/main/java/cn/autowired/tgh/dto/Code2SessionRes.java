@@ -1,5 +1,6 @@
 package cn.autowired.tgh.dto;
 
+import cn.autowired.tgh.entity.Userinfo;
 import lombok.Data;
 
 /**

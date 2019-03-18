@@ -32,4 +32,10 @@ public class JacksonUtils {
     public static String mapToJson(Map map)throws IOException {
         return mapper.writeValueAsString(map);
     }
+
+    public static Map jsonToMap(String jsonStr) throws IOException {
+        return mapper.readValue(jsonStr,Map.class);
+    }
+
+
 }

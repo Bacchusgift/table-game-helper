@@ -1,13 +1,15 @@
 
 package cn.autowired.tgh.common.enumcase;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * @Description:
  * @author: Bacchusgift
  * @Date: 2019/3/8 14:56
  * @version: 1.0.0
  */
-public enum Error {
+public enum ErrorCode {
     /**
      * 成功提示
      */
@@ -20,19 +22,31 @@ public enum Error {
     /**
      * 用户没有权限
      */
-    HAS_NO_AUTH(-2,"没有权限");
+    HAS_NO_AUTH(-2,"没有权限"),
+
+    /**
+     *  登录出现用户名或密码错误
+     */
+    WRONG_USERNAME_OR_PASSWORD(-3,"用户名或密码错误"),
+
+    /**
+     * 登录信息过期
+     */
+    LOGOUT(-4,"登录信息已过期");
 
     /**
      * 错误的代码
      */
+    @JsonProperty
     private final int errCode;
 
     /**
      * 错误的默认提示信息
      */
+    @JsonProperty
     private final String errInfo;
 
-    Error(int errCode, String errInfo) {
+    ErrorCode(int errCode, String errInfo) {
         this.errCode = errCode;
         this.errInfo = errInfo;
     }
