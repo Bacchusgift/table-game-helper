@@ -20,7 +20,7 @@ public class IdUtils {
 
 
     public static String roomId(){
-        int random = (int) (Math.round(Math.random()))*1000+10000;
+        int random = (int) (Math.floor(Math.random()*10000))+10000;
         return String.valueOf(random);
     }
 

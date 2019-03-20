@@ -34,7 +34,9 @@ public enum ErrorCode {
      */
     LOGOUT(-4,"登录信息已过期"),
 
-    HAS_NO_ROOM(-5,"查无此房间");
+    HAS_NO_ROOM(-5,"查无此房间"),
+
+    ROOM_FULL(-6,"房间已经满员");
 
     /**
      * 错误的代码

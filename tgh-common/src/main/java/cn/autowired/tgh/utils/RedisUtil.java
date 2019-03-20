@@ -4,18 +4,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
-import java.util.function.Function;
 
-import cn.autowired.tgh.utils.RedisTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 
-import org.springframework.dao.DataAccessException;
-import org.springframework.data.redis.connection.RedisConnection;
-import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
-import redis.clients.jedis.JedisCommands;
 
 /**
  * @author bacch
@@ -137,6 +131,21 @@ public class RedisUtil{
         }
     }
 
+    public boolean setnx(String key,Object value,long time) {
+        try {
+            if(time>0){
+                redisTemplate.opsForValue().setIfAbsent(key, value);
+                redisTemplate.expire(key,time,TimeUnit.SECONDS);
+            }else{
+                redisTemplate.opsForValue().setIfAbsent(key, value);
+            }
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     /**
      * 递增
      * @param key 键
@@ -189,7 +198,7 @@ public class RedisUtil{
      * @param map 对应多个键值
      * @return true 成功 false 失败
      */
-    public boolean hmset(String key, Map<String,Object> map){
+    public boolean hmset(String key, Map<Object, Object> map){
         try {
             redisTemplate.opsForHash().putAll(key, map);
             return true;

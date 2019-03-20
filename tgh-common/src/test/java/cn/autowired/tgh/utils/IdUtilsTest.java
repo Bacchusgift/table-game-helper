@@ -12,6 +12,10 @@ public class IdUtilsTest {
 
     @org.junit.Test
     public void roomId() {
-        int random = (int) (Math.round(Math.random()))*1000+10000;
+
+        for (int i = 0; i < 100; i++) {
+            int random = (int) (Math.floor(Math.random()*10000))+10000;
+            System.out.println(random);
+        }
     }
 }

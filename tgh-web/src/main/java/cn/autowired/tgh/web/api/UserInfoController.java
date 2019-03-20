@@ -4,32 +4,21 @@ package cn.autowired.tgh.web.api;
 import cn.autowired.tgh.base.ResultData;
 import cn.autowired.tgh.common.BaseController;
 import cn.autowired.tgh.common.enumcase.ErrorCode;
+import cn.autowired.tgh.dto.Code2SessionRes;
 import cn.autowired.tgh.dto.UserInfoDto;
 import cn.autowired.tgh.entity.UserInfo;
 import cn.autowired.tgh.service.IUserInfoService;
-import cn.autowired.tgh.dto.Code2SessionRes;
 import cn.autowired.tgh.utils.IdUtils;
-import cn.autowired.tgh.utils.JacksonUtils;
 import cn.autowired.tgh.utils.RedisUtil;
-import cn.autowired.tgh.web.configuration.RedisConfig;
-import cn.autowired.tgh.web.configuration.RestTemplateConfig;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.api.R;
-import com.google.common.collect.Maps;
-import jdk.nashorn.internal.objects.annotations.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
-import redis.clients.jedis.Jedis;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 
 /**
@@ -67,10 +56,9 @@ public class UserInfoController extends BaseController {
             openid = code2SessionRes.getOpenid();
             String session_key = code2SessionRes.getSession_key();
              value = IdUtils.enWxLoginSessionAndOpenId(session_key, openid);
-             key = IdUtils.sessionKey();
+             key = "sessionKey"+openid;
             //混合用户的sessionkey和openid存入redis 过期时间为2小时,将key返回给小程序作为登录态
             redisUtil.set(key,value,2*60*60L);
-            UserInfo userInfo = new UserInfo();
             UserInfo existsUser = userInfoService.getOne((Wrapper<UserInfo>) new QueryWrapper().eq("openid", openid));
             if (null != existsUser) {
 
@@ -78,7 +66,6 @@ public class UserInfoController extends BaseController {
                 userinfo.setOpenId(openid);
                 userInfoService.saveOrUpdate(userinfo);
             }
-
         }
         HashMap hashMap = new HashMap();
         hashMap.put("userkey", key);
@@ -88,14 +75,13 @@ public class UserInfoController extends BaseController {
 
     @PostMapping("/setUserInfo/{openid}")
     public ResultData saveOrUpdateUserInfo(@PathVariable String openid,@RequestBody UserInfoDto userInfoDto) {
+        UserInfo existsUser = userInfoService.getOne((Wrapper<UserInfo>) new QueryWrapper().eq("openid", openid));
         if (userInfoDto != null) {
-            UserInfo userInfo = new UserInfo();
-            UserInfo existsUser = userInfoService.getOne((Wrapper<UserInfo>) new QueryWrapper().eq("openid", openid));
             if (null != existsUser) {
                 existsUser.setCity(userInfoDto.getCity());
                 existsUser.setCountry(userInfoDto.getCountry());
                 existsUser.setSex(userInfoDto.getGender());
-                existsUser.setHeadimgurl(userInfoDto.getAvatarUrl());
+                existsUser.setAvatarUrl(userInfoDto.getAvatarUrl());
                 existsUser.setNickname(userInfoDto.getNickName());
                 existsUser.setProvince(userInfoDto.getProvince());
                 userInfoService.saveOrUpdate(existsUser);
@@ -104,9 +90,6 @@ public class UserInfoController extends BaseController {
                return ResultData.bad(ErrorCode.WRONG_USERNAME_OR_PASSWORD);
             }
         }
-
-
-
-        return null;
+        return ResultData.bad(ErrorCode.LOGOUT);
     }
 }

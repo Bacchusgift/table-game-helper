@@ -11,6 +11,7 @@ import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * <p>
@@ -33,7 +34,7 @@ public class UserInfo extends Model<UserInfo> {
     /**
      * 用户头像地址
      */
-    private String headimgurl;
+    private String avatarUrl;
 
     /**
      * 用户性别 1是男 2是女 0是未知
@@ -81,6 +82,7 @@ public class UserInfo extends Model<UserInfo> {
     @TableField("openId")
     private String openId;
 
+
     /**
      * 用户unionId
      */
@@ -96,17 +98,18 @@ public class UserInfo extends Model<UserInfo> {
     /**
      * 创建时间
      */
-    private LocalDateTime createTime;
+    private Date createTime;
 
     /**
      * 修改时间
      */
-    private LocalDateTime updateTime;
+    private Date updateTime;
 
 
     @Override
     protected Serializable pkVal() {
         return null;
     }
+
 
 }

@@ -7,6 +7,7 @@ import lombok.ToString;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 
 /**
  * @Description:
@@ -34,13 +35,13 @@ public class RoomInfoDto implements Serializable {
      * 房间玩家列表
      */
     @JsonProperty
-    private ArrayList playerList;
+    private LinkedList playerList;
 
     /**
      * 房主
      */
     @JsonProperty
-    private String owner ;
+    private String owner;
 
 
 }
