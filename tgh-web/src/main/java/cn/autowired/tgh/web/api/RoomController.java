@@ -10,6 +10,7 @@ import cn.autowired.tgh.utils.IdUtils;
 import cn.autowired.tgh.utils.RedisUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.google.common.collect.Maps;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -85,7 +86,7 @@ public class RoomController {
         if (room.size() == 0) {
             return ResultData.bad(ErrorCode.HAS_NO_ROOM);
         }
-        LinkedList<Map<String, UserInfoDto>> playerList = (LinkedList<Map<String, UserInfoDto>>) room.get("playerList");
+        LinkedList<Map<String, Object>> playerList = (LinkedList<Map<String, Object>>) room.get("playerList");
         boolean flag = true;
         if (playerList.size() >= (int)room.get("roomSize")){
             return ResultData.ok(ErrorCode.ROOM_FULL);
@@ -111,17 +112,25 @@ public class RoomController {
 
     @GetMapping("/exitRoom/{roomId}")
     public ResultData exitRoom(@PathVariable String roomId,@RequestParam String openid) {
+        Map<Object, Object> room = redisUtil.hmget(roomId);
+        if (room.size() == 0) {
+            return ResultData.bad(ErrorCode.HAS_NO_ROOM);
+        }
+        LinkedList<Map<String, Object>> playerList = (LinkedList<Map<String, Object>>) room.get("playerList");
 
+        for (Map<String, Object> stringUserInfoDtoMap : playerList) {
+            String playerOpenid = (String) stringUserInfoDtoMap.get("openid");
+            if (openid.equals(playerOpenid)) {
 
-
-
+            }
+        }
         return ResultData.ok();
     }
 
     @GetMapping("/prepareData/{roomId}")
     public ResultData prepareData(@PathVariable String roomId) throws IOException {
         Map<Object, Object> room = redisUtil.hmget(roomId);
-        LinkedList<Map<String,UserInfoDto>> playerList = (LinkedList) room.get("playerList");
+        LinkedList<Map<String,Object>> playerList = (LinkedList) room.get("playerList");
         return ResultData.ok(playerList);
     }
 }
