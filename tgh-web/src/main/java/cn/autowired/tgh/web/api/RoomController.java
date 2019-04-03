@@ -3,19 +3,20 @@ package cn.autowired.tgh.web.api;
 import cn.autowired.tgh.base.ResultData;
 import cn.autowired.tgh.common.enumcase.ErrorCode;
 import cn.autowired.tgh.dto.RoomInfoDto;
-import cn.autowired.tgh.dto.UserInfoDto;
 import cn.autowired.tgh.entity.UserInfo;
 import cn.autowired.tgh.service.IUserInfoService;
 import cn.autowired.tgh.utils.IdUtils;
 import cn.autowired.tgh.utils.RedisUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.google.common.collect.Maps;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
 
 /**
  * @Description:

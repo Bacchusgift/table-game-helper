@@ -15,7 +15,7 @@ import java.util.Date;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author bacchus
@@ -24,7 +24,7 @@ import java.util.Date;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("userinfo")
+@TableName("user_info")
 public class UserInfo extends Model<UserInfo> {
 
     private static final long serialVersionUID = 1L;

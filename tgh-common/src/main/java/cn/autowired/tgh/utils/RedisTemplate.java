@@ -14,9 +14,7 @@ import org.springframework.stereotype.Component;
 
 public class RedisTemplate extends org.springframework.data.redis.core.RedisTemplate {
 
-    public static ThreadLocal<Integer> indexdb = new ThreadLocal<Integer>(){
-        @Override protected Integer initialValue() { return 0; }
-    };
+    public static ThreadLocal<Integer> indexdb = ThreadLocal.withInitial(() -> 0);
 
     @Override
     protected RedisConnection preProcessConnection(RedisConnection connection, boolean existingConnection) {
